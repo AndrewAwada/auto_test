@@ -1,0 +1,58 @@
+import expecttest
+import pytest
+from PythonSE.ExamplePrograms.zune_days import zune_days
+
+TIMEOUT = 5
+
+class TestGeneratedSymbolicTests(expecttest.TestCase):
+
+    @pytest.mark.timeout(TIMEOUT)
+    def test_zune_days_generated_0(self):
+        # path constraint: [Not(365 < days)]
+        result = zune_days(365, False)
+        assert result == 365
+
+    @pytest.mark.timeout(TIMEOUT)
+    def test_zune_days_generated_1(self):
+        # path constraint: [365 < days, is_leap, 366 < days, Not(365 < days__1), days__1 == days - 366]
+        result = zune_days(463, True)
+        assert result == 97
+
+    @pytest.mark.timeout(TIMEOUT)
+    def test_zune_days_generated_2(self):
+        # path constraint: [365 < days, is_leap, 366 < days, 365 < days__1, days__1 == days - 366]
+        result = zune_days(1388, True)
+        self.assertExpectedInline(
+            str(result),
+            """\
+<expect output not recorded yet>
+""",
+        )
+
+    @pytest.mark.timeout(TIMEOUT)
+    def test_zune_days_generated_4(self):
+        # path constraint: [365 < days, is_leap, Not(366 < days), 365 < days]
+        result = zune_days(366, True)
+        self.assertExpectedInline(
+            str(result),
+            """\
+<expect output not recorded yet>
+""",
+        )
+
+    @pytest.mark.timeout(TIMEOUT)
+    def test_zune_days_generated_5(self):
+        # path constraint: [365 < days, Not(is_leap), Not(365 < days__2), days__2 == days - 365]
+        result = zune_days(525, False)
+        assert result == 160
+
+    @pytest.mark.timeout(TIMEOUT)
+    def test_zune_days_generated_6(self):
+        # path constraint: [365 < days, Not(is_leap), 365 < days__2, days__2 == days - 365]
+        result = zune_days(1387, False)
+        self.assertExpectedInline(
+            str(result),
+            """\
+<expect output not recorded yet>
+""",
+        )
